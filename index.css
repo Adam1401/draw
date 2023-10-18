@@ -1,0 +1,52 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: grey;
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+#drawingCanvas {
+    display: flex;
+    background-color: grey;
+    width: 100%;
+    height: 93vh;
+}
+
+#controls {
+    display: flex;
+    justify-content: center;
+    background-color: grey;
+    width: 100%;
+    height: 7vh;
+}
+
+#clearButton{
+    background-color: transparent;
+    border: none;
+    width: 7vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#clearButton img{
+    width: 100%;
+    border: none;
+    cursor: pointer;
+}
+
+#colorPickerContainer{
+    background-color: transparent;
+    border: none;
+    width: 7vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#colorPickerContainer img{
+    width: 100%;
+    border: none;
+    cursor: pointer;
+}
