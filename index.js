@@ -22,7 +22,6 @@ canvas.addEventListener("mousedown", () => {
     isDrawing = true;
 });
 
-// Gestionnaire d'événements pour mettre à jour la pile undo lors du dessin
 canvas.addEventListener("mouseup", () => {
     isDrawing = false;
     context.beginPath();
@@ -31,6 +30,22 @@ canvas.addEventListener("mouseup", () => {
 });
 
 canvas.addEventListener("mousemove", draw);
+
+canvas.addEventListener("touchstart", (event) => {
+    isDrawing = true;
+    draw(event.touches[0]);
+});
+
+canvas.addEventListener("touchend", () => {
+    isDrawing = false;
+    context.beginPath();
+    undoStack.push(context.getImageData(0, 0, canvas.width, canvas.height));
+    //redoStack.length = 0; // Réinitialiser la pile redo lorsque de nouveaux dessins sont effectués
+});
+
+canvas.addEventListener("touchmove", (event) => {
+    draw(event.touches[0]);
+});
 
 clearButton.addEventListener("click", () => {
     context.clearRect(0, 0, canvas.width, canvas.height);
@@ -66,10 +81,6 @@ document.addEventListener("keydown", function(event) {
     }
 });
 
-// Créer une pile pour stocker les états du dessin
-
-
-// Gestionnaire d'événements pour la touche "Ctrl + Z" (Annuler)
 document.addEventListener("keydown", function(event) {
     if (event.ctrlKey && event.key === "z") {
         event.preventDefault(); // Empêche la navigation arrière du navigateur
@@ -81,7 +92,6 @@ document.addEventListener("keydown", function(event) {
     }
 });
 
-// Gestionnaire d'événements pour la touche "Ctrl + Y" (Rétablir)
 document.addEventListener("keydown", function(event) {
     if (event.ctrlKey && event.key === "y") {
         event.preventDefault(); // Empêche la navigation avant du navigateur
@@ -92,5 +102,3 @@ document.addEventListener("keydown", function(event) {
         }
     }
 });
-
-
