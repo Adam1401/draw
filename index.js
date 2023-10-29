@@ -6,6 +6,7 @@ const colorPickerImage = document.getElementById("colorPickerImage");
 let isDrawing = false;
 const undoStack = [];
 const redoStack = [];
+let isErasing = false;
 
 // Appeler la fonction de redimensionnement lors du chargement initial de la page
 resizeCanvas();
@@ -63,9 +64,14 @@ colorPickerImage.addEventListener("click", () => {
 
 function draw(event) {
     if (!isDrawing) return;
-    context.lineWidth = 4;
     context.lineCap = "round";
-    context.strokeStyle = colorPicker.value;
+    if (isErasing === true) {
+        context.strokeStyle = "gray"
+        context.lineWidth = 15;
+    } else {
+        context.lineWidth = 4;
+        context.strokeStyle = colorPicker.value;
+    }
 
     context.lineTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop);
     context.stroke();
@@ -73,7 +79,7 @@ function draw(event) {
     context.moveTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop);
 }
 
-document.addEventListener("keydown", function(event) {
+document.addEventListener("keydown", function (event) {
     if (event.key === "Delete" || event.key === "Backspace") {
         context.clearRect(0, 0, canvas.width, canvas.height);
         undoStack.length = 0;
@@ -81,7 +87,7 @@ document.addEventListener("keydown", function(event) {
     }
 });
 
-document.addEventListener("keydown", function(event) {
+document.addEventListener("keydown", function (event) {
     if (event.ctrlKey && event.key === "z") {
         event.preventDefault(); // Empêche la navigation arrière du navigateur
 
@@ -92,7 +98,7 @@ document.addEventListener("keydown", function(event) {
     }
 });
 
-document.addEventListener("keydown", function(event) {
+document.addEventListener("keydown", function (event) {
     if (event.ctrlKey && event.key === "y") {
         event.preventDefault(); // Empêche la navigation avant du navigateur
 
@@ -102,3 +108,14 @@ document.addEventListener("keydown", function(event) {
         }
     }
 });
+const eraseButton = document.getElementById("eraserButton");
+
+eraseButton.addEventListener("click", () => {
+    if (isErasing === false) {
+        isErasing = true;
+    }
+    else {
+        isErasing = false;
+    }
+});
+
