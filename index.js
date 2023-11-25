@@ -66,9 +66,10 @@ function draw(event) {
     if (!isDrawing) return;
     context.lineCap = "round";
     if (isErasing === true) {
-        context.strokeStyle = "gray"
+        context.globalCompositeOperation = "destination-out";
         context.lineWidth = 15;
     } else {
+        context.globalCompositeOperation = "source-over";
         context.lineWidth = 4;
         context.strokeStyle = colorPicker.value;
     }
