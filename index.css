@@ -21,7 +21,7 @@ body {
     height: 7vh;
 }
 
-#clearButton{
+#clearButton {
     background-color: transparent;
     border: none;
     width: 7vh;
@@ -30,13 +30,13 @@ body {
     align-items: center;
 }
 
-#clearButton img{
+#clearButton img {
     width: 100%;
     border: none;
     cursor: pointer;
 }
 
-#colorPickerContainer{
+#colorPickerContainer {
     background-color: transparent;
     border: none;
     width: 7vh;
@@ -45,7 +45,22 @@ body {
     align-items: center;
 }
 
-#colorPickerContainer img{
+#colorPickerContainer img {
+    width: 100%;
+    border: none;
+    cursor: pointer;
+}
+
+#eraserButton {
+    background-color: transparent;
+    border: none;
+    width: 7vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#eraserButton img {
     width: 100%;
     border: none;
     cursor: pointer;
